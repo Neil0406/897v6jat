@@ -1,0 +1,26 @@
+
+Django說明:
+1. 爬蟲程式
+   位置： ../897v6jat/x_1/mysite/crawler.py
+   #若出現 IndexError: list index out of range 請增加 time.sleep() 延遲時間
+
+2. 執行爬蟲後取得4個csv檔案
+   位置： ../897v6jat/x_1/mysite/crawler.py
+ - momo.csv 
+ - momo_bank_dis.csv
+ - special_product.csv
+ - limited_time.csv
+
+3. 整理程式 data.py
+   位置：/Users/weichenho/Desktop/897v6jat/x_1/mysite/momo_app/data.py
+ - 將以上csv取出整理，最後由views呼叫傳至前端
+
+4. 排程設定
+ - 可於Linux系統中輸入 crontab -e 進行設置
+
+Django執行流程：
+1. cd /../897v6jat/x_1/mysite
+
+2. python3 manage.py runserver 0.0.0.0:8000 
+
+3. 於瀏覽器輸入 localhost:8000

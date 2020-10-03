@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>
+    .list-group-item{
+        display: flex;
+        justify-content:space-around;
+
+    }
+
+</style>
+
+  </head>
+  <body>
+    <div style="width: 100%; height: 70px;"></div>
+    <nav class="navbar navbar-light bg-light fixed-top"style="display: flex; justify-content:space-around;" >
+        <a class="navbar-brand" href="#">MOMO_API</a>
+    </nav>
+    <div class="container-fluid">
+      <a class="btn btn-primary btn-lg" href="../" role="button">回上頁</a>
+      <div style="width: 100%; height: 20px;"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-danger" role="alert">
+                    <h5>使用說明：</h5>
+                    <br>1.僅提供GET方式
+                    <br>2.Type: id(int)
+                    <br>3.Type: 其他皆為String
+                    <br>4.API位置請點選Link      
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="alert alert-danger" role="alert">
+                        <h5> Python範例:</h5>
+                        <br> python
+                        <br>>>> import requests
+                        <br>>>> import json
+                        <br>>>> res = requests.get('http://xx.xx.xx.xx:xx/momo_api')
+                        <br>>>> res
+                        <br> Response [200]
+                        <br>>>> res.json()
+                        <hr>
+                        {'Target': '優惠',
+                        <br>
+                        'Class': '個人清潔',
+                        <br>
+                        'Title': '【澎澎MAN】咖啡因沐浴乳-1200gx3(團購優惠)',
+                        <br>
+                        'Price': '539',
+                        <br>
+                        'Discount': nan},
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+ <!-- ---------------------------------------------------             -->
+            <div class="col-md-12">
+                <div class="card text-center">
+                    <div class="card-header">
+                      <ul class="nav nav-pills card-header-pills">
+                        <li class="nav-item">
+                          <a class="nav-link active">MOMO特價商品</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="/momo_api">Link</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="card-body">
+                      <h5 class="card-title">格式</h5>
+                      <p class="card-text">                        {'Target': '優惠',
+                        <br>
+                        'Class': '個人清潔',
+                        <br>
+                        'Title': '【澎澎MAN】咖啡因沐浴乳-1200gx3(團購優惠)',
+                        <br>
+                        'Price': '539',
+                        <br>
+                        'Discount': nan},
+                        </p>
+                    </div>
+                  </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="card" style="width: 100%;">
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Target <span class="te">搜尋目標</span></li>
+                      <li class="list-group-item">Class <span class="te">商品種類</span></li>
+                      <li class="list-group-item">Title <span class="te">商品名稱</span></li>
+                      <li class="list-group-item">Price <span class="te">商品價格</span></li>
+                      <li class="list-group-item">Discount <span class="te">是否已折扣</span></li>
+
+                    </ul>
+                  </div>
+            </div>
+ <!-- ---------------------------------------------------             -->
+            <div style="width: 100%; height: 50px;"></div>
+
+
+
+        </div>
+    </div>
+    <div style="width: 100%; height: 50px;"></div>
+
+<div style="height: 2px; width: 100%; background-color: rgb(160, 19, 19);"></div>
+<div class="footer" style="width: 100%; height: 50px;"></div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>

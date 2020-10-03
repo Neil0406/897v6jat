@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOMO購物網分析</title>
+	
+    <!-- 引入Booststrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!-- Echart -->
+    <script src="{%static 'echarts/dist/echarts.min.js'%}"></script>
+    <!-- D3 -->
+    <script src="https://d3js.org/d3.v3.min.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <a class="navbar-brand" href="#">MOMO</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="#">網站說明</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#echart">數量分析</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#bank">銀行優惠</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/api">API</a>
+            </li>
+          </ul>
+        </div>
+    </nav>
+<!-- ------------------------------------------------------------------ -->
+<div style="width: 100%; height:60px;"></div>
+    <div class="jumbotron">
+        <h3 class="display-5">MOMO購物網相關折扣活動</h3>
+        <br>
+        <p class="lead">針對特定"關鍵字"，如折扣, 優惠, 下殺, 促銷, 特價等進行搜尋，並可在../mysite/crawler裡新增關鍵字。</p>
+        <hr class="my-4">
+        <h5 style="color: brown;">ORDERLY Python Interview 使用</h5>
+        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+    </div>
+<!-- -----------------------------網站說明------------------------------------- -->
+<div style="width: 100%; height:30px;"></div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="" style="width: 100%; height:400px">
+                    <h5>目標網頁：MOMO購物網</h5><hr>
+                    <p>商品蒐集：{{all_val}}筆</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <img src="{% static 'img/momo.jpg'%}" alt="" style="width: 600px; height: 400px;">
+            </div>
+        </div>
+    </div>
+<div style="width: 100%; height:50px;"></div>
+    <hr id='echart' style="width: 80%; ">
+<!-- -----------------------------第一區塊------------------------------------ -->
+<div style="width: 100%; height:50px;"></div>
+    <div class="container">
+        <h2 class="text-center" >數量分析</h2>
+        <p class="text-center">使用:Echart</p>
+        <div style="width: 100%; height:50px;"></div>
+        <div class="row">
+            <div class="col-md-6">
+                <div id="p1" style="width: 550px;height: 400px;"></div>
+            </div>
+            <div class="col-md-6">
+                <div id="p2" style="width: 550px;height: 400px;"></div>
+            </div>
+        </div>
+    </div>
+<!-- ------------------------------課程種類數量------------------------------------ -->
+<div style="width: 100%; height:80px;"></div>
+
+<div class="" style="background-color:rgb(242,243,245)">
+    <div style="width: 100%; height:80px;"></div>
+
+    <div class="container" >
+
+        <h2 class="text-center">今日最大牌</h2>
+           <div style="width: 100%; height:50px;"></div>
+        <div class="row">  
+            <div class="col-md-6">
+                <div class="" style="width: 100%; height:400px">
+                    <div class="card">
+                        <ul class="list-group list-group-flush">
+                        {% for i in special_val%}
+                          <li class="list-group-item">{{i.Name}} 
+                            <button type="button" onclick="window.open('{{i.Href}}');" class="btn btn-outline-primary">Go</button>
+                          </li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="" style="width: 100%; height:400px">
+                    <p>首頁右方特別商品區</p>
+                </div>
+            </div>
+        </div>
+        
+        <div style="width: 100%; height:50px;"></div>
+        <h2 class='text-center'>24Ｈ限時特價</h2>
+        <p class='text-center'>這裡只取前12比資料</p>
+        <div style="width: 100%; height:50px;"></div>
+        <div class="row">
+            {% for i in limited_val%}
+            <div class="col-md-3">
+                <div class="card border-primary mb-3" style="max-width: 18rem;">
+                    <div class="card-header">{{i.Name}} / {{i.Discount}}</div>
+                    <div class="card-body text-primary">
+                    <p class="card-title">{{i.Info}}</p>
+                    <p class="card-text">{{i.Price}}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>   
+    </div>
+</div> 
+
+<!-- ------------------------------課程價格/時數------------------------------------ -->
+<div id='bank' style="width: 100%; height:80px;"></div>
+
+<div class="container">
+    <h2 class="text-center">銀行優惠</h2>
+    <p class='text-center'>各銀行 / 行動支付相關活動資訊</p>
+    <div style="width: 100%; height:80px;"></div>
+
+    <div class="row">
+        {% for i in bank_val %}
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card">
+                <div class="card-body" style="background-color:aquamarine">
+                <h5 class="card-title">{{i.name}}</h5>
+                <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                </div>
+                <ul class="list-group list-group-flush">
+                {% for j in i.info %}                   
+                    <li class="list-group-item">{{j}}</li>                  
+                {% endfor %}
+                <!-- <li class="list-group-item">Dapibus ac facilisis in</li>
+                <li class="list-group-item">Vestibulum at eros</li> -->
+                </ul>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+
+ 
+</div>
+<div style="width: 100%; height:80px;"></div>
+
+
+<div style="background-color: rgb(26, 25, 25);">
+    <div class="container">
+        <div class="footer" style="height: 80px;">
+            <div class="footer-left">
+                <div style="width: 100%; height:15px;"></div>
+                <p class="footer-company-name" style="color:rgb(204, 204, 204)">All Rights Reserved</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>	
+
+  	<!-- 引入chartjs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.15.0/d3.min.js"></script>
+
+
+    <script type="text/javascript">
+        var p1_ = echarts.init(document.getElementById('p1'));
+        option = {
+            title: {
+                text: '關鍵字搜尋商品數量',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: '{a} <br/>{b} : {c} ({d}%)'
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+                data: [
+                {%for i in val2%}
+                    '{{i.target}}',
+                  {%endfor%}
+                ]
+            },
+            series: [
+                {
+                    name: '單位 / 件',
+                    type: 'pie',
+                    radius: '55%',
+                    center: ['50%', '60%'],
+                    data: [
+                    {% for i in val2 %}
+                      {value: {{i.target_num}}, name: '{{i.target}}'},
+                    {% endfor %}
+                
+                    ],
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+        p1_.setOption(option);
+    
+    </script>
+
+   <!-- ------------------------p5------------------------------------------------------ -->
+<script type="text/javascript">
+    var p2_ = echarts.init(document.getElementById('p2'));
+    option = {
+        title: {
+            text: '各分類搜尋商品數量',
+            left: 'center'
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'value',
+            boundaryGap: [0, 0.01]
+        },
+        yAxis: {
+            type: 'category',
+            data: [
+                {%for i in val%}
+                    '{{i.class}}',
+                {%endfor%}
+            ]
+        },
+        series: [
+            {
+                name: '數量',
+                type: 'bar',
+                data: [
+                {%for i in val%}
+                    {{i.product_num}},
+                {%endfor%}
+                ]
+            },
+        ]
+    };
+   p2_.setOption(option);
+</script>
+
+</body>
+</html>
