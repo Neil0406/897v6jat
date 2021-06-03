@@ -19,4 +19,4 @@ def api(request):
 def momo_api(request):
 
     api_data = pd.read_csv('momo.csv').to_dict('recode')
-    return HttpResponse(json.dumps(api_data),content_type="application/json")
+    return HttpResponse(json.dumps(api_data, ensure_ascii=False),content_type="application/json")
